@@ -153,42 +153,6 @@
     /* Cover rules for 16:9: choose dimension by aspect ratio to fill the viewport */
     @media (min-aspect-ratio: 16/9) { .hero-video iframe { width: 100vw; height: 56.25vw; } }
     @media (max-aspect-ratio: 16/9) { .hero-video iframe { width: 177.78vh; height: 100vh; } }
-
-
-/* ——— Single 360 viewer ——— */
-.pano360{
-  width:min(1200px,95vw);
-  margin:12px auto 24px;
-  background:#0b0b0b;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid #e6e8eb;
-}
-.pano-toolbar{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:8px 10px; background:#f6f7f9; color:#0f172a;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-}
-.pbtn{
-  border:0; background:white; padding:6px 10px; border-radius:8px; cursor:pointer;
-  font-weight:600; box-shadow:0 1px 1px rgba(0,0,0,.05);
-}
-.pbtn:hover{ background:#eef2ff; }
-.pinfo{ font-size:14px; opacity:.9; }
-.pano-canvas{ position:relative; width:100%; aspect-ratio:16/9; background:#000; }
-.pano-canvas canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-
-/* Подсветка связанной строки таблицы */
-.naming-table tbody tr.is-active{ background:#fffbe6 !important; }
-.naming-table tbody tr.is-hover{ background:#f1f5ff !important; }
-
-/* Делает строку кликабельной, если есть панорама */
-.naming-table tbody tr[data-pano]{ cursor:pointer; }
-
-
-
-
-
   </style>
 </head>
 <body>
@@ -203,19 +167,6 @@
   <div id="viewer">
     <iframe src="https://app.seekbeak.com/v/A0zrX6AMqvQ" allowfullscreen></iframe>
   </div>
-  <!-- SINGLE 360° VIEWER (Three.js) -->
-<div id="pano360" class="pano360">
-  <div class="pano-toolbar">
-    <button id="prevPano" class="pbtn" aria-label="Previous">◀</button>
-    <div class="pinfo">
-      <span id="panoIndex">1</span>/<span id="panoCount">1</span> ·
-      <strong id="panoTitle">—</strong>
-    </div>
-    <button id="nextPano" class="pbtn" aria-label="Next">▶</button>
-  </div>
-  <div id="panoCanvasHost" class="pano-canvas"></div>
-</div>
-
   <div class="section"><h2 class="table-title">Naming Opportunities</h2></div>
   <div class="table-wrap">
     <table class="naming-table">
@@ -227,7 +178,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr data-pano="img/pan/pan1.jpg"><td>Emergency</td><td class="cost">$20,000,000</td><td class="avail">1</td></tr>
+        <tr><td>Emergency</td><td class="cost">$20,000,000</td><td class="avail">1</td></tr>
         <tr><td>Inpatient Bed Floors</td><td class="cost">$5,000,000</td><td class="avail">3</td></tr>
         <tr><td>Inpatient Bed Floor Wings</td><td class="cost">$1,000,000</td><td class="avail">6</td></tr>
         <tr><td>Reception Centre</td><td class="cost">$500,000</td><td class="avail">3</td></tr>
@@ -664,97 +615,5 @@
       </ul>
     </div>
   </div>
-
-
-
-<script type="module">
-  import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-  import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-
-  window.addEventListener('load', () => {
-    // --- ВАШ ПРЕЖНИЙ КОД ИЗ СКРИПТА, но:
-    // 1) уберите все упоминания глобального THREE/OrbitControls, т.к. теперь они из import
-    // 2) оставьте логику один-в-один
-    // ↓↓↓ Сокращённо оставляю готовый фрагмент:
-    const rows = Array.from(document.querySelectorAll('.naming-table tbody tr[data-pano]'));
-    const items = rows.map((tr, i) => ({ index:i, url:tr.getAttribute('data-pano'), title:(tr.cells[0]?.textContent||`Item ${i+1}`).trim(), tr }));
-
-    const ui = {
-      index: document.getElementById('panoIndex'),
-      count: document.getElementById('panoCount'),
-      title: document.getElementById('panoTitle'),
-      prev:  document.getElementById('prevPano'),
-      next:  document.getElementById('nextPano'),
-      host:  document.getElementById('panoCanvasHost'),
-      wrap:  document.getElementById('pano360'),
-    };
-
-    ui.count.textContent = items.length.toString();
-    if (!items.length) { ui.wrap.style.display='none'; return; }
-
-    const renderer = new THREE.WebGLRenderer({ antialias:true });
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    const size = () => {
-      const w = ui.host.clientWidth; let h = ui.host.clientHeight;
-      if (!h) { h = Math.round(w*9/16); ui.host.style.height = h+'px'; }
-      renderer.setSize(w,h,false);
-    };
-    size();
-    ui.host.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, ui.host.clientWidth/ui.host.clientHeight, 0.1, 1000);
-    camera.position.set(0,0,0.1);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false; controls.enablePan = false;
-    controls.enableDamping = true; controls.dampingFactor = 0.07; controls.rotateSpeed = 0.35;
-
-    const sphere = new THREE.Mesh(
-      new THREE.SphereGeometry(50,64,64),
-      new THREE.MeshBasicMaterial({ side: THREE.BackSide })
-    );
-    scene.add(sphere);
-
-    const loader = new THREE.TextureLoader();
-    let current = 0, currentTexture = null;
-
-    const setActive = i => { rows.forEach(tr=>tr.classList.remove('is-active')); items[i].tr.classList.add('is-active'); };
-    const uiUpdate = i => { ui.index.textContent = (i+1).toString(); ui.title.textContent = items[i].title; };
-    const dispose = t => t && t.dispose();
-
-    function loadPano(i){
-      const {url} = items[i]; uiUpdate(i); setActive(i);
-      loader.load(url, (tex)=>{
-        tex.colorSpace = THREE.SRGBColorSpace;
-        tex.center.set(0.5,0.5);
-        dispose(currentTexture);
-        currentTexture = tex; sphere.material.map = tex; sphere.material.needsUpdate = true;
-        renderer.render(scene,camera);
-      }, undefined, (e)=>{ console.error('Load error', url, e); alert('Не удалось загрузить: '+url); });
-    }
-    function show(i){ current = (i+items.length)%items.length; loadPano(current); }
-
-    ui.prev.onclick = ()=>show(current-1);
-    ui.next.onclick = ()=>show(current+1);
-    window.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft')show(current-1); if(e.key==='ArrowRight')show(current+1); });
-    items.forEach((it,i)=>{ it.tr.addEventListener('click', ()=>show(i)); it.tr.addEventListener('mouseenter',()=>it.tr.classList.add('is-hover')); it.tr.addEventListener('mouseleave',()=>it.tr.classList.remove('is-hover')); });
-
-    const onResize = ()=>{ size(); camera.aspect = (ui.host.clientWidth/ui.host.clientHeight)|| (16/9); camera.updateProjectionMatrix(); };
-    new ResizeObserver(onResize).observe(ui.host);
-    window.addEventListener('resize', onResize);
-    window.addEventListener('orientationchange', onResize);
-
-    (function loop(){ controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop); })();
-    show(0);
-  });
-</script>
-
-
-
-
-
-
-
 </body>
 </html>
