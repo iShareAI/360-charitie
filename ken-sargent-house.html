@@ -6,6 +6,7 @@
   <title>Ken Sargent House — Ishare 360°</title>
   <link rel="icon" href="img/letra-i.png" type="image/png">
 
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -763,8 +764,7 @@ td.idx{ width:36px; color:#64748b; }
 
 
 
-/* Media showcase */
-.media-showcase{ width:min(1200px,95vw); margin:28px auto 40px; }
+
 .media-hero{ position:relative; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(2,6,23,.12); }
 .media-hero .frame{ position:relative; aspect-ratio:16/9; background:#000; }
 .media-hero iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; outline:0; }
@@ -784,11 +784,810 @@ td.idx{ width:36px; color:#64748b; }
 .media-cap{ padding:10px 12px; font:600 13px/1.25 Inter,system-ui; color:#334155; }
 
 
+/* Full-bleed pano/video */
+.pano-bleed{
+  width:100vw;
+  margin:24px calc(50% - 50vw) 16px;   /* выходим из контейнера */
+}
+.pano-bleed .frame{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;                  /* 16:9 */
+  background:#000;
+  border-radius:12px;                  /* можно 0, если хочешь строго «в край» */
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(2,6,23,.12);
+}
+.pano-bleed iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0; outline:0;
+}
+
+
+
+/* Full-bleed media hero */
+.media-hero{
+  width:100vw;
+  margin:24px calc(50% - 50vw) 16px; /* bleed edge-to-edge */
+  position:relative;
+}
+.media-hero .frame{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;           /* 16:9 */
+  background:#000;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(2,6,23,.12);
+}
+.media-hero iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0; outline:0;
+}
+
+/* Soft marketing overlay */
+.media-hero .overlay{
+  position:absolute; inset:0; pointer-events:none;
+  border-radius:12px;
+  background:
+    radial-gradient(900px 360px at 72% 0%,
+      rgba(37,124,255,.14) 0%,
+      rgba(37,124,255,0) 60%)
+    ;
+}
+
+
+/* Make the video cover its container (no black bars) */
+.media-hero{ width:100vw; margin:24px calc(50% - 50vw) 16px; height:70vh; position:relative; }
+.media-hero .frame{ position:relative; width:100%; height:100%; padding:0; background:#000; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(2,6,23,.12); }
+.media-hero iframe{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  border:0; outline:0;
+}
+/* Cover logic: fill width on wide screens, fill height on tall screens */
+@media (min-aspect-ratio:16/9){
+  .media-hero iframe{ width:100vw; height:56.25vw; }
+}
+@media (max-aspect-ratio:16/9){
+  .media-hero iframe{ width:177.78vh; height:100vh; }
+}
+
+/* Optional soft overlay (not black) */
+.media-hero .overlay{
+  position:absolute; inset:0; pointer-events:none; border-radius:12px;
+  background:radial-gradient(900px 360px at 72% 0%, rgba(37,124,255,.14) 0%, rgba(37,124,255,0) 60%);
+}
+
+
+
+.media-title{ font:800 clamp(18px,2.2vw,22px)/1.2 Poppins,Inter,system-ui; margin:8px 0 4px; }
+.media-sub{ color:#64748b; margin:0 0 14px; }
+
+/* Masonry-like grid (2-cols desktop, 1-col mobile) */
+.media-grid{
+  display:grid; gap:12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width:740px){
+  .media-grid{ grid-template-columns: 1fr 1fr; }
+  /* stagger right column to create a chessboard look */
+  .media-grid .tile:nth-child(even){ margin-top: 24px; }
+}
+
+/* Big tiles */
+.tile{
+  position:relative; overflow:hidden; border-radius:14px;
+  background:#000; box-shadow:0 10px 26px rgba(2,6,23,.12);
+  isolation:isolate;
+}
+.tile img{
+  width:100%; height:100%; display:block; object-fit:cover;
+  transition: transform .5s ease, filter .5s ease;
+}
+.tile:hover img{ transform:scale(1.03); }
+
+/* Size mix for the checkerboard effect */
+.tile.wide{ aspect-ratio:16/9; }
+.tile.tall{ aspect-ratio:4/5; }
+
+/* On small screens all tiles become wide for better fit */
+@media (max-width:739.98px){
+  .tile.tall{ aspect-ratio:16/9; }
+}
+
+
+/* === Gallery: no headings, no radius, minimal gaps === */
+.media-title,
+.media-sub { display: none !important; }
+
+.media-showcase { margin: 16px auto 24px; } /* чуть компактнее */
+
+.media-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;                      /* минимальный зазор */
+}
+@media (min-width:740px){
+  .media-grid{ grid-template-columns: 1fr 1fr; }
+  .media-grid .tile:nth-child(even){ margin-top: 4px; } /* лёгкая «шахматка» */
+}
+
+/* большие плиты без скруглений и теней */
+.tile{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background:#000;
+  overflow: hidden;
+}
+.tile img{
+  display:block;
+  width:100%; height:100%;
+  object-fit: cover;
+  border-radius: 0 !important;
+  transition: none;              /* без hover-эффектов, если нужно максимально строго */
+}
+
+/* Split blocks (text + image) */
+.split {
+  width:min(1200px,95vw);
+  margin:28px auto;
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  align-items:center;
+  gap:24px;
+}
+.split .txt h2{
+  margin:0 0 8px;
+  font:800 clamp(20px,2.8vw,30px)/1.2 Poppins,Inter,system-ui;
+  color:#0f172a;
+}
+.split .txt p{
+  margin:0;
+  color:#475569;
+  font:500 clamp(14px,1.6vw,16px)/1.6 Inter,system-ui;
+}
+.split .media{
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(2,6,23,.12);
+}
+.split .media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  aspect-ratio:4/3;
+}
+
+/* Chessboard variant (image left on desktop) */
+@media (min-width:901px){
+  .split.alt{ grid-template-columns:1fr 1.1fr; }
+  .split.alt .media{ order:-1; }
+}
+
+/* Mobile: stack */
+@media (max-width:900px){
+  .split{ grid-template-columns:1fr; gap:14px; }
+  .split .media{ order:-1; }          /* image first */
+  .split.alt .media{ order:-1; }      /* keep same order */
+}
+
+/* Full-bleed photo (edge to edge) */
+.full-bleed-photo{
+  width:100vw;
+  margin:28px calc(50% - 50vw);
+}
+.full-bleed-photo .frame{
+  position:relative;
+  height:100vh;                       /* full screen */
+  min-height:70vh;                    /* safety on small laptops */
+  background:#000;
+  overflow:hidden;
+}
+.full-bleed-photo img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+
+
+/* Bigger containers */
+.media-showcase{ width:min(1400px,96vw); }      /* gallery wider */
+.split{ width:min(1400px,96vw); }               /* split blocks wider */
+
+/* Make the image column larger on desktop */
+.split{ grid-template-columns:.9fr 1.1fr; }     /* text | image */
+.split.alt{ grid-template-columns:1.1fr .9fr; } /* image | text */
+
+/* Taller images inside split blocks */
+.split .media img{ aspect-ratio:16/9; }         /* was 4/3 */
+@media (min-width:1100px){
+  .split .media img{ min-height:460px; }        /* give them more presence */
+}
+@media (max-width:900px){
+  .split{ grid-template-columns:1fr; }          /* stack on mobile */
+  .split .media img{ min-height:40vh; }         /* large but safe on phones */
+}
+
+/* Full-bleed photo stays truly full screen */
+.full-bleed-photo .frame{ height:100vh; min-height:80vh; }
+
+
+
+/* ==== Text reveal (scroll-in) ==== */
+:root{ --ease: cubic-bezier(.22,.8,.27,1); }
+
+.reveal{ --stagger: .06s; }
+.reveal [data-animate]{
+  opacity:0; transform: translateY(12px); filter: blur(3px);
+  transition: transform .6s var(--ease), opacity .6s var(--ease), filter .6s var(--ease);
+  transition-delay: var(--d,0s);
+}
+.reveal.is-in [data-animate]{ opacity:1; transform:none; filter: blur(0); }
+
+/* Headline: word-by-word entrance */
+.words span{
+  display:inline-block;
+  opacity:0; transform: translateY(12px);
+  filter: blur(3px);
+  transition: transform .55s var(--ease), opacity .55s var(--ease), filter .55s var(--ease);
+  transition-delay: calc(var(--word-index) * .035s);
+}
+.reveal.is-in .words span{ opacity:1; transform:none; filter: blur(0); }
+
+/* Gradient underline that grows after reveal */
+.reveal-underline{ position:relative; }
+.reveal-underline::after{
+  content:""; position:absolute; left:0; bottom:-8px; height:3px; width:0%;
+  background: linear-gradient(90deg,#1d9bf0,#7c3aed);
+  border-radius:999px;
+  transition: width .65s var(--ease) .25s;
+}
+.reveal.is-in .reveal-underline::after{ width:100%; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .reveal [data-animate], .words span{ transition:none !important; opacity:1 !important; transform:none !important; filter:none !important; }
+  .reveal-underline::after{ width:100%; }
+}
+
+
+/* Layout tokens */
+:root{
+  --wrap: min(1200px, 95vw);
+  --radius: 16px;
+  --shadow: 0 18px 46px rgba(2,6,23,.12);
+  --accent: #257cff;
+}
+
+/* Base feature block (image + copy) */
+.feature{
+  width: var(--wrap);
+  margin: 32px auto;
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;      /* big image */
+  gap: clamp(16px, 2vw, 28px);
+  align-items: center;
+}
+
+/* Flip sides for checkerboard */
+.feature.alt{
+  grid-template-columns: .92fr 1.08fr;
+}
+.feature.alt .media{ order: 2; }
+.feature.alt .copy { order: 1; }
+
+/* Media (make images large) */
+.feature .media{
+  height: clamp(360px, 48vw, 620px);        /* big, responsive height */
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.feature .media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.015);
+  transition: transform .6s ease;
+}
+.feature:hover .media img{ transform: scale(1.03); }
+
+/* Text column */
+.feature .copy{
+  padding: clamp(6px, 1.2vw, 12px);
+}
+
+
+
+/* Underline accent that draws in */
+.fx-underline{
+  display: block;
+  height: 3px;
+  width: 0;
+  margin-top: 12px;
+  background: linear-gradient(90deg, var(--accent), #7c3aed);
+  border-radius: 9999px;
+  animation: fx-draw .8s ease .15s forwards;
+}
+
+/* Keyframes */
+@keyframes fx-fadeUp{
+  from{ opacity:0; transform: translateY(10px); }
+  to  { opacity:1; transform: none; }
+}
+@keyframes fx-draw{ to{ width: clamp(160px, 38%, 360px); } }
+
+/* Full-bleed hero image (Block 3) */
+.feature-bleed,
+.feature.bleed{
+  width: 100vw;
+  margin: 32px calc(50% - 50vw);
+  position: relative;
+}
+.feature-bleed .media,
+.feature.bleed .media{
+  height: clamp(60vh, 72vh, 84vh);  /* fill most of the viewport */
+  border-radius: 0;
+  box-shadow: none;
+}
+.feature-bleed .media img,
+.feature.bleed .media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Soft marketing overlay (optional) */
+.feature-bleed::after,
+.feature.bleed::after{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  background: radial-gradient(900px 360px at 70% 0%, rgba(37,124,255,.14) 0%, rgba(37,124,255,0) 60%);
+}
+
+/* Responsive stack */
+@media (max-width: 900px){
+  .feature,
+  .feature.alt{
+    grid-template-columns: 1fr;
+  }
+  .feature .media{
+    height: clamp(220px, 52vw, 420px);
+  }
+}
+
+/* Motion respect */
+@media (prefers-reduced-motion: reduce){
+  .fx-title, .fx-lead{ animation: none; opacity:1; transform:none; }
+  .fx-underline{ animation: none; width: clamp(160px, 38%, 360px); }
+}
 
 
 
 
 
+/* Give right column more room inside the grid */
+.feature.alt{
+  /* left = fixed-ish text column, right = flexible media */
+  grid-template-columns: minmax(320px, 520px) 1fr;
+}
+
+/* Half-bleed image to the right edge of the viewport */
+.feature.alt .media.bleed-right{
+  /* push the right edge to the viewport edge */
+  margin-right: calc(50% - 50vw);
+  /* make it larger */
+  height: clamp(460px, 64vh, 820px);
+  /* crisp edge on the outside */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  /* shadows at the edge look odd; drop it */
+  box-shadow: none;
+}
+
+/* Hover scale still nice but a bit softer on huge image */
+.feature.alt .media.bleed-right img{
+  transform: scale(1.01);
+}
+.feature.alt:hover .media.bleed-right img{
+  transform: scale(1.025);
+}
+
+/* Mobile: stack and cancel the bleed */
+@media (max-width: 900px){
+  .feature.alt{
+    grid-template-columns: 1fr;
+  }
+  .feature.alt .media.bleed-right{
+    margin-right: 0;
+    height: clamp(240px, 52vw, 440px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+}
+
+/* Per-word animated reveal */
+.feature .fx-title .word,
+.feature .fx-lead .word{
+  display:inline-block;
+  white-space:pre;
+  opacity:0;
+  transform: translate3d(0, 0.9em, 0) rotate(8deg) skewY(6deg) scale(.92);
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+}
+
+/* Title: punchier motion with overshoot */
+.feature.inview .fx-title .word{
+  animation: titleWordIn .70s cubic-bezier(.2,.9,.2,1) var(--d) forwards;
+}
+
+/* Lead: smoother slide-up */
+.feature.inview .fx-lead .word{
+  animation: leadWordIn .60s cubic-bezier(.2,.8,.2,1) var(--d) forwards;
+}
+
+@keyframes titleWordIn{
+  0%   { opacity:0; transform: translate3d(0, 1.1em, 0) rotate(10deg) skewY(8deg) scale(.90); filter: blur(10px); }
+  60%  { opacity:1; transform: translate3d(0,-0.05em,0) rotate(0) skewY(0) scale(1.05); filter: blur(0); }
+  100% { opacity:1; transform: none; }
+}
+
+@keyframes leadWordIn{
+  0%   { opacity:0; transform: translate3d(0, .8em, 0) scale(.98); filter: blur(6px); }
+  100% { opacity:1; transform: none; filter: none; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .feature .fx-title .word,
+  .feature .fx-lead .word{
+    opacity:1 !important; transform:none !important; filter:none !important; animation:none !important;
+  }
+}
+
+
+/* если у body появится .no-anim — показываем текст без блюра */
+.no-anim .feature .fx-title .word,
+.no-anim .feature .fx-lead .word{
+  opacity:1; transform:none; filter:none; animation:none;
+}
+
+
+
+
+.feature .fx-title .word,
+.feature .fx-lead  .word{
+  display:inline-block;
+  white-space:pre;
+  opacity:0;
+  transform: translate3d(0, 0.9em, 0) rotate(8deg) skewY(6deg) scale(.92);
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+}
+
+.feature.inview .fx-title .word{
+  animation: titleWordIn .70s cubic-bezier(.2,.9,.2,1) var(--d) forwards;
+}
+.feature.inview .fx-lead .word{
+  animation: leadWordIn .60s cubic-bezier(.2,.8,.2,1) var(--d) forwards;
+}
+
+@keyframes titleWordIn{
+  0%   { opacity:0; transform: translate3d(0, 1.1em, 0) rotate(10deg) skewY(8deg) scale(.90); filter: blur(10px); }
+  60%  { opacity:1; transform: translate3d(0,-0.05em,0) rotate(0) skewY(0) scale(1.05); filter: blur(0); }
+  100% { opacity:1; transform: none; }
+}
+@keyframes leadWordIn{
+  0%   { opacity:0; transform: translate3d(0, .8em, 0) scale(.98); filter: blur(6px); }
+  100% { opacity:1; transform: none; filter: none; }
+}
+
+
+
+:root{ --fx-ease: cubic-bezier(.22,.8,.27,1); }
+
+/* стартовое состояние */
+.feature .fx-title,
+.feature .fx-lead{
+  opacity: 0;
+  transform: translateY(24px) scale(.98);
+  filter: blur(8px);
+  will-change: transform, opacity, filter;
+  position: relative;
+}
+
+/* появление (без линии) */
+.feature.is-in .fx-title{ animation: fx-pop .70s var(--fx-ease) forwards; }
+.feature.is-in .fx-lead { animation: fx-pop .70s var(--fx-ease) .12s forwards; }
+
+@keyframes fx-pop{
+  0%   { opacity:0; transform: translateY(24px) scale(.96); filter: blur(8px); letter-spacing:.3px; }
+  55%  { opacity:1; transform: translateY(-2px) scale(1.02); filter: blur(0); }
+  100% { opacity:1; transform: none; letter-spacing:0; }
+}
+
+/* ── опционально: «wipe»-проезд, НЕ линия, а мягкая плашка поверх текста.
+   Если не нужен вовсе — просто удали этот блок. */
+.feature .fx-title::after,
+.feature .fx-lead::after{
+  content:""; position:absolute; inset:-2px -6px;
+  background: rgba(226,232,240,.75);
+  transform: translateX(-101%);
+  border-radius:6px; pointer-events:none;
+}
+.feature.is-in .fx-title::after{ transition: transform .55s var(--fx-ease) .02s; transform: translateX(101%); }
+.feature.is-in .fx-lead::after { transition: transform .55s var(--fx-ease) .18s; transform: translateX(101%); }
+
+/* уважение prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .feature .fx-title, .feature .fx-lead{
+    opacity:1; transform:none; filter:none; animation:none !important;
+  }
+  .feature .fx-title::after, .feature .fx-lead::after{ display:none; }
+}
+
+
+
+/* === Feature: clean text reveal === */
+:root { --fx-ease: cubic-bezier(.22,.8,.27,1); }
+
+.feature .fx-title,
+.feature .fx-lead{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform .45s var(--fx-ease), opacity .45s var(--fx-ease);
+  will-change: transform, opacity;
+}
+
+/* триггер сработает и для .is-in, и для .inview */
+.feature.is-in .fx-title,
+.feature.inview .fx-title{
+  opacity: 1;
+  transform: none;
+}
+
+.feature.is-in .fx-lead,
+.feature.inview .fx-lead{
+  opacity: 1;
+  transform: none;
+  transition-delay: .08s; /* лёгкая ступенька после заголовка */
+}
+
+/* уважение prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .feature .fx-title,
+  .feature .fx-lead{ opacity:1; transform:none; transition:none; }
+}
+
+
+/* ===== Energy section (scoped) ===== */
+:root { --ease: cubic-bezier(.22,.8,.27,1); }
+
+#energy-smart{
+  width: min(1400px, 96vw);
+  margin: 28px auto;
+  display: grid;
+  grid-template-columns: minmax(320px,520px) 1fr; /* текст | картинка */
+  align-items: center;
+  gap: 24px;
+}
+
+#energy-smart .media{
+  order: 2;                               /* картинка справа */
+  height: clamp(460px, 64vh, 820px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 46px rgba(2,6,23,.12);
+}
+#energy-smart .media img{
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: scale(1.01);
+  transition: transform .6s ease;
+}
+#energy-smart:hover .media img{ transform: scale(1.025); }
+
+#energy-smart .media.bleed-right{
+  margin-right: calc(50% - 50vw); /* полу-bleed к правому краю экрана */
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: none;
+}
+
+#energy-smart .copy{
+  order: 1;
+  padding: clamp(6px, 1.2vw, 12px);
+}
+
+/* Лёгкий reveal для заголовка и лида */
+#energy-smart .fx-title,
+#energy-smart .fx-lead{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+  will-change: opacity, transform;
+}
+#energy-smart.is-in .fx-title,
+#energy-smart.inview .fx-title{         /* поддержка обоих классов */
+  opacity: 1; transform: none;
+}
+#energy-smart.is-in .fx-lead,
+#energy-smart.inview .fx-lead{
+  opacity: 1; transform: none;
+  transition-delay: .08s;               /* чуть позже текста заголовка */
+}
+
+/* Мобилка: стэк без bleed */
+@media (max-width: 900px){
+  #energy-smart{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  #energy-smart .media{
+    order: -1;                          /* картинка сверху */
+    height: clamp(240px, 52vw, 440px);
+    border-radius: 16px;
+    box-shadow: 0 18px 46px rgba(2,6,23,.12);
+    margin-right: 0;
+  }
+}
+
+/* Уважение reduce-motion */
+@media (prefers-reduced-motion: reduce){
+  #energy-smart .fx-title,
+  #energy-smart .fx-lead{
+    opacity: 1; transform: none; transition: none;
+  }
+}
+
+
+
+
+
+/* ---- Energy section: kill global blur/wipe ---- */
+#energy-smart .fx-title,
+#energy-smart .fx-lead{
+  filter: none !important;               /* убрать размытость */
+}
+
+#energy-smart .fx-title::after,
+#energy-smart .fx-lead::after{
+  content: none !important;              /* убрать выезжающую плашку */
+  display: none !important;
+}
+
+/* чтобы анимация точно дошла до чистого состояния */
+#energy-smart.is-in .fx-title,
+#energy-smart.is-in .fx-lead,
+#energy-smart.inview .fx-title,
+#energy-smart.inview .fx-lead{
+  opacity: 1;
+  transform: none;
+  filter: none !important;
+}
+
+
+
+/* === Energy Smart (scoped & clean) === */
+#energy-smart{
+  width:min(1400px,96vw);
+  margin:28px auto;
+  display:grid;
+  grid-template-columns:minmax(320px,520px) 1fr; /* текст | картинка */
+  align-items:center;
+  gap:24px;
+}
+
+/* Медиа справа, полублид к правому краю */
+#energy-smart .media{ 
+  order:2;
+  height:clamp(460px,64vh,820px);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 18px 46px rgba(2,6,23,.12);
+}
+#energy-smart .media.bleed-right{
+  margin-right:calc(50% - 50vw);
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+  box-shadow:none;
+}
+#energy-smart .media img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Текст слева */
+#energy-smart .copy{ order:1; padding:clamp(6px,1.2vw,12px); }
+#energy-smart .fx-title{
+  margin:0 0 8px;
+  font:800 clamp(20px,2.8vw,30px)/1.2 Poppins,Inter,system-ui;
+  color:#0f172a;
+}
+#energy-smart .fx-lead{
+  margin:0;
+  color:#475569;
+  font:500 clamp(14px,1.6vw,16px)/1.6 Inter,system-ui;
+}
+
+/* Жёсткий сброс всех глобальных анимаций/эффектов только здесь */
+#energy-smart .fx-title,
+#energy-smart .fx-lead{
+  opacity:1 !important;
+  transform:none !important;
+  filter:none !important;
+  position:static;
+}
+#energy-smart .fx-title::after,
+#energy-smart .fx-lead::after{
+  content:none !important;
+  display:none !important;
+}
+
+/* Нежный появляющийся эффект по желанию */
+@keyframes es-fade { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+#energy-smart.is-in .fx-title{ animation: es-fade .45s ease both; }
+#energy-smart.is-in .fx-lead { animation: es-fade .45s ease .08s both; }
+
+/* Мобильный стек без bleed */
+@media (max-width:900px){
+  #energy-smart{ grid-template-columns:1fr; gap:14px; }
+  #energy-smart .media{
+    order:-1;
+    height:clamp(240px,52vw,440px);
+    margin-right:0; border-radius:16px; box-shadow:0 18px 46px rgba(2,6,23,.12);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #energy-smart .fx-title,#energy-smart .fx-lead{ animation:none !important; }
+}
+
+
+
+
+/* Half-bleed к левому краю экрана */
+.feature .media.bleed-left{
+  margin-left: calc(50% - 50vw);
+  height: clamp(460px, 64vh, 820px);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: none;
+}
+@media (max-width: 900px){
+  .feature .media.bleed-left{
+    margin-left: 0;
+    height: clamp(240px, 52vw, 440px);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+}
+
+
+/* Чистый reveal только для наших секций с data-reveal */
+.feature[data-reveal] .fx-title,
+.feature[data-reveal] .fx-lead{
+  opacity: 0;
+  transform: translateY(8px);
+  filter: none !important;               /* без размытия */
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+
+/* Вход: просто плавное появление */
+.feature[data-reveal].is-in .fx-title,
+.feature[data-reveal].is-in .fx-lead{
+  opacity: 1;
+  transform: none;
+}
+
+/* Выключаем все «wipe/overlay/word-by-word» внутри этих секций */
+.feature[data-reveal] .fx-title::after,
+.feature[data-reveal] .fx-lead::after{ content: none !important; display: none !important; }
+.feature[data-reveal] .fx-title .word,
+.feature[data-reveal] .fx-lead  .word{ animation: none !important; filter: none !important; transform: none !important; }
 
 
   </style>
@@ -1039,70 +1838,203 @@ td.idx{ width:36px; color:#64748b; }
 <!-- MEDIA SHOWCASE -->
 <section class="media-showcase" id="showcase">
   <!-- Big hero video -->
-  <div class="media-hero">
-    <div class="frame">
-      <iframe
-        src="https://www.youtube.com/embed/XpV5CmB3bvw?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=XpV5CmB3bvw"
-        allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <i class="overlay" aria-hidden="true"></i>
+ <div class="media-hero">
+  <div class="frame">
+    <iframe
+      src="https://www.youtube.com/embed/XpV5CmB3bvw?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=XpV5CmB3bvw"
+      title="Ken Sargent House — teaser"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
   </div>
+  <i class="overlay" aria-hidden="true"></i>
+</div>
 
-  <h3 class="media-title">Project Gallery</h3>
-  <p class="media-sub">A quick visual tour of Ken Sargent House.</p>
 
-  <!-- Masonry grid (filled by JS) -->
-  <div class="media-grid" id="kshMasonry"></div>
+  
+<!-- 1) Energy — текст слева, фото справа (alt) -->
+<section id="energy-smart" class="feature alt" data-reveal>
+  <figure class="media bleed-right">
+    <img src="img/ks4.png" alt="Rooftop solar at Ken Sargent House" loading="lazy">
+  </figure>
+
+  <div class="copy">
+    <h2 class="fx-title">Energy-Smart, Future-Ready</h2>
+    <p class="fx-lead">
+      High-efficiency rooftop solar helps offset common-area loads, lowers operating costs,
+      and cuts carbon for years to come.
+    </p>
+  </div>
+</section>
+
+<section id="comfort-living" class="feature" data-reveal>
+  <figure class="media bleed-left">
+    <img src="img/ks6.png" alt="Warm, human-centered interiors" loading="lazy">
+  </figure>
+  <div class="copy">
+    <h2 class="fx-title">Warm, Family-First Design</h2>
+    <p class="fx-lead">
+      Daylight, intuitive wayfinding and soft finishes create calm, dignified routines for
+      residents and families throughout the day.
+    </p>
+  </div>
 </section>
 
 
+
+<!-- Full-screen image -->
+<section class="full-bleed-photo">
+  <div class="frame">
+    <img src="img/ks8.png" alt="Aerial view, Ken Sargent House">
+  </div>
+</section>
+
+
+
+<section id="comfort-living" class="feature" data-reveal>
+  <figure class="media bleed-left">
+    <img
+      src="img/ks7.png"
+      alt="Aerial view of Ken Sargent House with rooftop solar; warm wood entry deck with ramp and stairs, paths and parking on the right."
+      loading="lazy">
+  </figure>
+
+  <div class="copy">
+    <h2 class="fx-title">Designed for Families</h2>
+<p class="fx-lead">
+  Soft finishes, clear wayfinding, and abundant daylight support dignified, unhurried daily life for residents and loved ones.
+</p>
+
+  </div>
+</section>
+
+
+
+<section id="garden-gazebo" class="feature alt" data-reveal>
+  <figure class="media bleed-right">
+    <img src="img/ks3.png" alt="Garden gazebo with morning light and flowers" loading="lazy">
+  </figure>
+
+  <div class="copy">
+    <h2 class="fx-title">Garden Gazebo</h2>
+    <p class="fx-lead">
+      A shaded outdoor pavilion for quiet conversation and reflection. Accessible paths, seating,
+      and soft planting create a calm, restorative place for residents and families.
+    </p>
+  </div>
+</section>
+
+
+<div class="hero-ctas">
+  <a href="#naming" class="btn btn-primary">Explore Opportunities</a>
+
+  <a href="https://example.com/donation-guide"
+     class="btn btn-orange btn-pill"
+     target="_blank" rel="noopener"
+     title="Discover how to make efficient donation">
+    Discover How To Make Efficient Donation
+  </a>
+</div>
+
+
 <script>
-(function(){
-  // images available at /img/*.png
-  const files = ["ks2.png","ks3.png","ks4.png","ks5.png","ks6.png","ks7.png","ks8.png"];
-  const captions = {
-    "ks2.png":"Exterior perspective",
-    "ks3.png":"Garden approach",
-    "ks4.png":"Roof terrace",
-    "ks5.png":"Courtyard view",
-    "ks6.png":"Main entry",
-    "ks7.png":"Community patio",
-    "ks8.png":"Evening view"
-  };
+(() => {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('is-in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
 
-  // shuffle
-  for (let i = files.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [files[i], files[j]] = [files[j], files[i]];
-  }
-
-  const grid = document.getElementById('kshMasonry');
-  const frag = document.createDocumentFragment();
-
-  files.forEach(name => {
-    const card = document.createElement('a');
-    card.className = 'media-card';
-    card.href = `img/${name}`;
-    card.target = '_blank';
-    card.rel = 'noopener';
-
-    const img = document.createElement('img');
-    img.src = `img/${name}`;
-    img.loading = 'lazy';
-    img.alt = captions[name] || 'Ken Sargent House';
-    card.appendChild(img);
-
-    const cap = document.createElement('div');
-    cap.className = 'media-cap';
-    cap.textContent = captions[name] || '';
-    card.appendChild(cap);
-
-    frag.appendChild(card);
-  });
-
-  grid.appendChild(frag);
+  // watch both “reveal” styles + concrete IDs
+  document
+    .querySelectorAll('#energy-smart, #comfort-living, .reveal, [data-reveal]')
+    .forEach(el => io.observe(el));
 })();
 </script>
+
+
+
+
+
+
+<script>
+(() => {
+  // все feature-блоки с флагом data-reveal
+  const blocks = document.querySelectorAll('.feature[data-reveal]');
+  if (!blocks.length) return;
+
+  const reveal = el => el.classList.add('is-in');
+
+  const io = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            reveal(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -12% 0px' })
+    : null;
+
+  blocks.forEach(el => {
+    if (io) io.observe(el);
+  });
+
+  // страховка: если блок уже в поле зрения при load
+  window.addEventListener('load', () => {
+    blocks.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) reveal(el);
+    });
+  }, { once: true });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+/* Build KSH gallery (images only, no click) */
+(function(){
+  const grid = document.getElementById('kshMasonry');
+  if(!grid) return;
+
+  // Images from your /img folder (add/remove as needed)
+  const imgs = [
+    'img/ks2.png',
+    'img/ks3.png',
+    'img/ks4.png',
+    'img/ks5.png',
+    'img/ks6.png',
+    'img/ks7.png',
+    'img/ks8.png'
+  ];
+
+  // Alternate sizes to get a chessboard pattern
+  imgs.forEach((src, i) => {
+    const fig = document.createElement('figure');
+    fig.className = 'tile ' + (i % 2 === 0 ? 'tall' : 'wide');
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Ken Sargent House render ' + (i+1);
+    img.loading = 'lazy';
+
+    fig.appendChild(img);
+    grid.appendChild(fig);
+  });
+})();
+</script>
+
 
 
 
@@ -1308,10 +2240,40 @@ td.idx{ width:36px; color:#64748b; }
 </script>
 
 
+<script>
+/* IntersectionObserver: toggles .is-in when block enters viewport */
+(function(){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  // Split headline into word spans
+  function splitWords(el){
+    const text = (el.textContent || "").trim().split(/\s+/);
+    el.textContent = "";
+    text.forEach((w,i)=>{
+      const s = document.createElement("span");
+      s.textContent = w + (i < text.length - 1 ? " " : "");
+      s.style.setProperty("--word-index", i);
+      el.appendChild(s);
+    });
+    el.classList.add("words");
+  }
+
+  // Observe all .reveal blocks
+  document.querySelectorAll(".reveal").forEach(el=> io.observe(el));
+  // Prepare headlines that need word animation
+  document.querySelectorAll(".reveal-words").forEach(splitWords);
+})();
+</script>
 
 
 
 
 </body>
 </html>
-
