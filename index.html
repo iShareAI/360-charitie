@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ishare 360° </title>
   <link rel="icon" href="img/letra-i.png" type="image/png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
@@ -63,21 +64,21 @@
   font-size: clamp(22px, 3.4vw, 34px);
   position: relative;
   animation: fadeUp .7s ease both;
-  color: #0f172a;                   
+  color: #0f172a;                   /* спокойный тёмный */
 }
 
 .page-title:before {
-  content: none;                    
+  content: none;                    /* убираем боковую полоску */
 }
 
 .page-title .accent {
-  color: #0f172a;                   
+  color: #0f172a;                   /* обычный тёмный текст */
   background: none;
   -webkit-text-fill-color: initial;
 }
 
 .page-title .muted {
-  color: #475569;                  
+  color: #475569;                   /* приглушённый серый */
   font-weight: 500;
 }
 
@@ -166,8 +167,8 @@
 
 /* Мини-плеер превью */
 .hover-preview {
-  position: fixed;               
-  width: 280px;                  
+  position: fixed;                /* якорим к окну, удобнее позиционировать */
+  width: 280px;                   /* можно менять, держим 16:9 */
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: 10px;
@@ -177,7 +178,7 @@
   transform: translateY(6px) scale(.98);
   transition: opacity .15s ease, transform .15s ease;
   z-index: 9999;
-  pointer-events: none;         
+  pointer-events: none;           /* не перехватывает курсор, чтобы не мигало */
 }
 .hover-preview.show {
   opacity: 1;
@@ -201,12 +202,13 @@
   border-radius:10px; padding:8px; pointer-events:auto;
 }
 
+/* Селект: белый фон + тёмный текст, чтобы всё читалось */
 #panoSelect{
   appearance:none;
   font:500 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  color:#111;                            
-  background:rgba(255,255,255,.96);      
-  border:1px solid #d1d5db;              
+  color:#111;                            /* тёмный текст */
+  background:rgba(255,255,255,.96);      /* светлый фон */
+  border:1px solid #d1d5db;              /* светлая рамка */
   border-radius:8px;
   padding:8px 32px 8px 10px;
   min-width:240px; max-width:62vw; outline:none;
@@ -214,7 +216,7 @@
 }
 #panoSelect:focus{ box-shadow:0 0 0 2px rgba(99,102,241,.35); }
 
-
+/* Короткая подсветка ошибки при выборе пункта без ссылки */
 #panoSelect.invalid{
   border-color:#ef4444 !important;
   box-shadow:0 0 0 2px rgba(239,68,68,.35) !important;
@@ -227,12 +229,13 @@
 
 
 
-
+/* Внутренняя обёртка: чуть паддинга справа,
+   чтобы меню не липло к самому краю */
 .nav-inner{
   width:min(1200px,95vw);
   margin:0 auto;
   display:flex; align-items:center; gap:16px;
-  padding:30px 12px;                 
+  padding:30px 12px;                 /* ← добавили правый (и левый) отступ */
 }
 
 /* Лого слева — как было */
@@ -240,9 +243,9 @@
 
 /* МЕНЮ справа */
 .nav{
-  margin-left:auto;                  
-  display:flex; gap:12px;             
-  justify-content:flex-end;           
+  margin-left:auto;                   /* ← уводим блок меню вправо */
+  display:flex; gap:12px;             /* ← расстояние между кнопками */
+  justify-content:flex-end;           /* ← прижимаем к правому краю контейнера */
   flex-wrap:wrap;
 }
 
@@ -1766,8 +1769,6 @@ html, body { overflow-x: hidden; }
 
 </body>
 </html>
-
-
 
 
 

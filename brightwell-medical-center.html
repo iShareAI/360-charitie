@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ken Sargent House — Ishare 360°</title>
+  <title>Brightwell Medical Center — Ishare 360°</title>
   <link rel="icon" href="img/letra-i.png" type="image/png">
 
 
@@ -1615,6 +1615,19 @@ td.idx{ width:36px; color:#64748b; }
 
 
 
+.pano-embed{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* держим пропорции как у твоих медиа */
+  background: #000;
+  border-radius: 16px;      /* совпадает со стилем .media */
+  overflow: hidden;
+}
+.pano-embed iframe{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0; outline: 0;
+}
 
 
 
@@ -1629,8 +1642,8 @@ td.idx{ width:36px; color:#64748b; }
     </a>
     <nav class="nav">
       <a href="index.html" class="nav-link">General Hospital</a>
-      <a href="ken-sargent-house.html" class="nav-link active">Ken Sargent House</a>
-      <a href="brightwell-medical-center.html" class="nav-link">Brightwell Medical Center</a>
+      <a href="ken-sargent-house.html" class="nav-link">Ken Sargent House</a>
+      <a href="brightwell-medical-center.html" class="nav-link active">Brightwell Medical Center</a>
       <a href="campus-of-care.html" class="nav-link">Campus of Care</a>
       <i class="nav-marker" aria-hidden="true"></i>
     </nav>
@@ -1642,19 +1655,20 @@ td.idx{ width:36px; color:#64748b; }
   <header class="hero-phil is-brand compact luxe" role="banner" aria-label="Philanthropy hero">
     <div class="hero-right">
       <h1 class="hero-title">
-        <span class="hero-line">Ken Sargent House</span>
-        <span class="hero-line gradient">Transforming Care Together</span>
+        <span class="hero-line">Brightwell Medical Center</span>
+        <span class="hero-line gradient">Advancing Community Health with Compassion</span>
       </h1>
 
       <div class="hero-meta" aria-label="Project meta">
-        <span>Grande Prairie, Alberta</span><span class="dot"></span>
-        <span>Issued for 50% Client Review — Dec 13, 2024</span><span class="dot"></span>
-        <span>2 Storeys</span>
-      </div>
+  <span>Brightwell, Alberta</span><span class="dot"></span>
+  <span>Issued for Schematic Design — Oct 2025</span><span class="dot"></span>
+  <span>3 Storeys</span>
+</div>
 
-      <p class="hero-lead">
-        Part of the Grande Prairie Rotary Clubs Wellness Centre campus — supportive housing with private suites and shared amenities.
-      </p>
+      <p class="hero-subtitle">
+  Part of the community wellness network — a modern outpatient hub offering advanced diagnostics,
+  private consultation suites, and shared recovery amenities in an accessible, patient-first environment.
+</p>
 
       <div class="hero-ctas">
   <a href="#naming" class="btn btn-primary">Explore Opportunities</a>
@@ -1662,7 +1676,7 @@ td.idx{ width:36px; color:#64748b; }
   <a href="https://example.com/donation-guide"
      class="btn btn-orange btn-pill"
      target="_blank" rel="noopener"
-     title="Discover how to make efficient donation">
+     title="Discover how to make Tax efficient donations">
     Discover How To Make Tax Efficient Donations
   </a>
 </div>
@@ -1670,13 +1684,14 @@ td.idx{ width:36px; color:#64748b; }
 
 
       <ul class="hero-stats card" aria-label="Project highlights">
-        <li><strong>17</strong><span>Suites</span></li>
-        <li><strong>1,830&nbsp;m²</strong><span>Total Floor Area (16,216&nbsp;ft²)</span></li>
-        <li><strong>862&nbsp;m²</strong><span>Building Footprint (9,275&nbsp;ft²)</span></li>
-        <li><strong>4,234.8&nbsp;m²</strong><span>Site Area</span></li>
-        <li><strong>23</strong><span>Parking Stalls (2 barrier-free)</span></li>
-        <li><strong>19</strong><span>Parking Required</span></li>
-      </ul>
+  <li><strong>24</strong><span>Consult / Exam Rooms</span></li>
+  <li><strong>2,450&nbsp;m²</strong><span>Total Floor Area (26,370&nbsp;ft²)</span></li>
+  <li><strong>1,120&nbsp;m²</strong><span>Building Footprint (12,055&nbsp;ft²)</span></li>
+  <li><strong>5,600&nbsp;m²</strong><span>Site Area</span></li>
+  <li><strong>28</strong><span>Parking Stalls (3 barrier-free)</span></li>
+  <li><strong>24</strong><span>Parking Required</span></li>
+</ul>
+
     </div>
   </header>
 </div>
@@ -1685,7 +1700,7 @@ td.idx{ width:36px; color:#64748b; }
 
 <!-- 360° viewer -->
 <div id="viewer" aria-label="360° viewer">
-  <iframe id="panoFrame" src="https://app.seekbeak.com/v/ydjWPL4eq32" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <iframe id="panoFrame" src="https://app.seekbeak.com/v/OAzAWg5rqQp" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 
 <!-- Top summary table -->
@@ -1701,158 +1716,27 @@ td.idx{ width:36px; color:#64748b; }
   </tr>
 </thead>
 <tbody>
-  <!-- $250,000 -->
-  <tr data-pano="https://app.seekbeak.com/v/Xw1LWmR2qL8">
-  <td>Family &amp; Patient Communal Space</td>
-  <td class="cost">$250,000</td>
-  <td class="avail">1</td>
-  <td class="donor"></td>
-</tr>
+  <tr data-pano=""><td>MRI Scan Room</td><td class="cost" data-amount="1000000">$1,000,000</td><td class="avail">1</td><td class="donor">Special Recognition</td></tr>
+<tr data-pano=""><td>Suite Corridor</td><td class="cost" data-amount="500000">$500,000</td><td class="avail">1</td><td class="donor">Special Recognition</td></tr>
+<tr data-pano=""><td>Lobby</td><td class="cost" data-amount="200000">$200,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>ECHO</td><td class="cost" data-amount="250000">$250,000</td><td class="avail">1</td><td class="donor">Founder / Named</td></tr>
+<tr data-pano=""><td>Main Waiting</td><td class="cost" data-amount="200000">$200,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>MRI Control Room</td><td class="cost" data-amount="350000">$350,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Reception</td><td class="cost" data-amount="200000">$200,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Patient Holding Area</td><td class="cost" data-amount="200000">$200,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Radiologist</td><td class="cost" data-amount="150000">$150,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Patient Prep</td><td class="cost" data-amount="100000">$100,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Sub Waiting Room</td><td class="cost" data-amount="100000">$100,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Storage</td><td class="cost" data-amount="100000">$100,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>MRI Equipment Room</td><td class="cost" data-amount="100000">$100,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>ECHO Waiting</td><td class="cost" data-amount="100000">$100,000</td><td class="avail">1</td><td class="donor">Founder</td></tr>
+<tr data-pano=""><td>Staff W/R</td><td class="cost" data-amount="75000">$75,000</td><td class="avail">1</td><td class="donor">Patron</td></tr>
+<tr data-pano=""><td>Storage</td><td class="cost" data-amount="75000">$75,000</td><td class="avail">1</td><td class="donor">Patron</td></tr>
+<tr data-pano=""><td>Change Room</td><td class="cost" data-amount="50000">$50,000</td><td class="avail">1</td><td class="donor">Patron</td></tr>
+<tr data-pano=""><td>BF Change Room</td><td class="cost" data-amount="50000">$50,000</td><td class="avail">1</td><td class="donor">Patron</td></tr>
+<tr data-pano=""><td>Lockers</td><td class="cost" data-amount="50000">$50,000</td><td class="avail">1</td><td class="donor">Patron</td></tr>
+<tr data-pano=""><td>Mechanical / Electrical</td><td class="cost" data-amount="25000">$25,000</td><td class="avail">1</td><td class="donor">Benefactor</td></tr>
 
-  <tr data-pano="">
-    <td>Playground</td>
-    <td class="cost">$250,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Solar Panelling</td>
-    <td class="cost">$250,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-
-  <!-- $150,000 -->
-  <tr data-pano="">
-    <td>Dining Area</td>
-    <td class="cost">$150,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Kitchen</td>
-    <td class="cost">$150,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Covered Porch</td>
-    <td class="cost">$150,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Reception</td>
-    <td class="cost">$150,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-
-  <!-- $100,000 -->
-  <tr data-pano="">
-    <td>Quiet Space</td>
-    <td class="cost">$100,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-
-  <!-- $75,000 -->
-  <tr data-pano="">
-    <td>Suite A2 (Accessible Suite)</td>
-    <td class="cost">$75,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Suite A3 (Large Suite)</td>
-    <td class="cost">$75,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Playroom</td>
-    <td class="cost">$75,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-
-  <!-- $50,000 -->
-  <tr data-pano="">
-    <td>Bedroom (Suite)</td>
-    <td class="cost">$50,000</td>
-    <!-- TODO: set the real remaining quantity -->
-    <td class="avail">6</td>
-    <td class="donor">
-      <span class="badge badge-named">Fairview Health Complex Foundation</span>
-      <span class="badge badge-named">Aquatera</span>
-      <span class="badge badge-named">Canfor</span>
-    </td>
-  </tr>
-  <tr class="taken" data-pano="">
-    <td>Fitness Room</td>
-    <td class="cost">$50,000</td>
-    <td class="avail">0</td>
-    <td class="donor"><span class="badge badge-named">Tara Energy Services &amp; Bissel Family Funds</span></td>
-  </tr>
-  <tr class="taken" data-pano="">
-    <td>Laundry Room</td>
-    <td class="cost">$50,000</td>
-    <td class="avail">0</td>
-    <td class="donor"><span class="badge badge-named">Victoria's Attic, Support the Girls</span></td>
-  </tr>
-  <tr data-pano="">
-    <td>Social Space</td>
-    <td class="cost">$50,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Suite A</td>
-    <td class="cost">$50,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr data-pano="">
-    <td>Suite B</td>
-    <td class="cost">$50,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-
-  <!-- $25,000 -->
-  <tr class="taken" data-pano="">
-    <td>Children's Playroom</td>
-    <td class="cost">$25,000</td>
-    <td class="avail">0</td>
-    <td class="donor"><span class="badge badge-named">Catwauk Compression</span></td>
-  </tr>
-  <tr data-pano="">
-    <td>Comfort Corner (Small)</td>
-    <td class="cost">$25,000</td>
-    <td class="avail">1</td>
-    <td class="donor"></td>
-  </tr>
-  <tr class="taken" data-pano="">
-    <td>Comfort Corner</td>
-    <td class="cost">$25,000</td>
-    <td class="avail">0</td>
-    <td class="donor">
-      <span class="badge badge-named">Dynamud Logistic Services Inc.</span>
-      <span class="badge badge-named">Clearhills County</span>
-    </td>
-  </tr>
-  <tr class="taken" data-pano="">
-    <td>Gazebo</td>
-    <td class="cost">$25,000</td>
-    <td class="avail">0</td>
-    <td class="donor"><span class="badge badge-named">Game Host</span></td>
-  </tr>
-  <tr class="taken" data-pano="">
-    <td>Pantry</td>
-    <td class="cost">$25,000</td>
-    <td class="avail">0</td>
-    <td class="donor"><span class="badge badge-named">NuVista Energy</span></td>
-  </tr>
 </tbody>
 
 
@@ -1869,7 +1753,7 @@ td.idx{ width:36px; color:#64748b; }
  <div class="media-hero">
   <div class="frame">
     <iframe
-      src="https://www.youtube.com/embed/XpV5CmB3bvw?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=XpV5CmB3bvw"
+      src="https://www.youtube.com/embed/XpV5CmB3bvw?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=baQcgipcZ1s"
       title="Ken Sargent House — teaser"
       allow="autoplay; encrypted-media; picture-in-picture"
       referrerpolicy="strict-origin-when-cross-origin"
@@ -1883,82 +1767,82 @@ td.idx{ width:36px; color:#64748b; }
 <!-- 1) Energy — текст слева, фото справа (alt) -->
 <section id="energy-smart" class="feature alt" data-reveal>
   <figure class="media bleed-right">
-    <img src="img/ks4.png" alt="Rooftop solar at Ken Sargent House" loading="lazy">
-  </figure>
-
-  <div class="copy">
-    <h2 class="fx-title">Energy-Smart, Future-Ready</h2>
-    <p class="fx-lead">
-      High-efficiency rooftop solar helps offset common-area loads, lowers operating costs,
-      and cuts carbon for years to come.
-    </p>
-  </div>
-</section>
-
-<section id="comfort-living" class="feature" data-reveal>
-  <figure class="media bleed-left">
-    <img src="img/ks6.png" alt="Warm, human-centered interiors" loading="lazy">
-  </figure>
-  <div class="copy">
-    <h2 class="fx-title">Warm, Family-First Design</h2>
-    <p class="fx-lead">
-      Daylight, intuitive wayfinding and soft finishes create calm, dignified routines for
-      residents and families throughout the day.
-    </p>
-  </div>
-</section>
-
-
-
-<!-- Full-screen image -->
-<section class="full-bleed-photo">
-  <div class="frame">
-    <img src="img/ks8.png" alt="Aerial view, Ken Sargent House">
-  </div>
-</section>
-
-
-
-<section id="comfort-living" class="feature" data-reveal>
-  <figure class="media bleed-left">
-    <img
-      src="img/ks7.png"
-      alt="Aerial view of Ken Sargent House with rooftop solar; warm wood entry deck with ramp and stairs, paths and parking on the right."
-      loading="lazy">
-  </figure>
-
-  <div class="copy">
-    <h2 class="fx-title">Designed for Families</h2>
-<p class="fx-lead">
-  Soft finishes, clear wayfinding, and abundant daylight support dignified, unhurried daily life for residents and loved ones.
-</p>
-
-  </div>
-</section>
-
-
-
-<section id="garden-gazebo" class="feature alt" data-reveal>
-  <figure class="media bleed-right">
-    <img src="img/ks3.png" alt="Garden gazebo with morning light and flowers" loading="lazy">
-  </figure>
-
-  <div class="copy">
-    <h2 class="fx-title">Garden Gazebo</h2>
-    <p class="fx-lead">
-      A shaded outdoor pavilion for quiet conversation and reflection. Accessible paths, seating,
-      and soft planting create a calm, restorative place for residents and families.
-    </p>
-  </div>
-</section>
-
-
-
-<div class="wf-bleed">
-    <div class="hero-video">
-      <iframe src="https://www.youtube.com/embed/gNnFtDIplMM?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=frdUH-n-fng" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    <div class="pano-embed">
+      <iframe
+        src="https://app.seekbeak.com/v/YD1Gdxgozby"  <!-- ← вставь ссылку на свою панораму -->
+        title="360° Panorama — Energy Smart"
+        loading="lazy"
+        allow="accelerometer; gyroscope; fullscreen; xr-spatial-tracking"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
     </div>
+  </figure>
+
+  <div class="copy">
+  <h2 class="fx-title">Welcoming Lobby</h2>
+  <p class="fx-lead">
+    The bright and open lobby creates a warm first impression for patients and visitors. 
+    Natural light, comfortable seating, and clear wayfinding make it both inviting and functional 
+    — setting the tone for a calm and caring experience from the very first step inside.
+  </p>
+</div>
+
+</section>
+
+
+<section id="comfort-living" class="feature" data-reveal>
+  <figure class="media bleed-left">
+    <div class="pano-embed">
+      <iframe
+        src="https://app.seekbeak.com/v/lVjKnwgGzBb"
+        title="360° Panorama — Radiologist"
+        loading="lazy"
+        allow="accelerometer; gyroscope; fullscreen; xr-spatial-tracking"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </figure>
+
+  <div class="copy">
+    <h2 class="fx-title">Radiologist</h2>
+    <p class="fx-lead">
+      A focused clinical room designed for image review and consultation: calibrated displays,
+      controlled lighting, and intuitive circulation support accurate diagnostics and efficient
+      patient flow.
+    </p>
   </div>
+</section>
+
+
+
+
+<!-- MEDIA SHOWCASE -->
+<section class="media-showcase" id="showcase">
+  <!-- Big hero video -->
+ <div class="media-hero">
+  <div class="frame">
+    <iframe
+      src="https://www.youtube.com/embed/XpV5CmB3bvw?autoplay=1&mute=1&controls=0&playsinline=1&modestbranding=1&rel=0&loop=1&playlist=pnxXq2TqKjE"
+      title="Ken Sargent House — teaser"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
+  <i class="overlay" aria-hidden="true"></i>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="hero-ctas">
