@@ -2194,22 +2194,27 @@ html, body { overflow-x: hidden; }
 
 
 
-<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
-
+<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" defer></script>
 <script>
-  window.ChatKit.mount({
-    element: document.body,
-    workflowId: "wf_69088de093ac819096128e221efda65c0c916918504f9a78",
-    version: "3",
-    domainKey: "domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0",
-    theme: {
-      colorScheme: "dark",
-      accentColor: "#1E90FF"
-    },
-    position: {
-      bottom: "20px",
-      right: "20px"
+  window.addEventListener('DOMContentLoaded', function () {
+    if (!window.ChatKit) {
+      console.error('ChatKit script failed to load');
+      return;
     }
+
+    window.ChatKit.mount({
+      workflowId: "wf_69088de093ac819096128e221efda65c0c916918504f9a78",
+      version: "3",
+      domainKey: "domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0",
+      theme: {
+        colorScheme: "dark",
+        accentColor: "#1E90FF"
+      },
+      position: {
+        bottom: "20px",
+        right: "20px"
+      }
+    });
   });
 </script>
 
@@ -2219,8 +2224,10 @@ html, body { overflow-x: hidden; }
 
 
 
+
 </body>
 </html>
+
 
 
 
