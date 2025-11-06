@@ -2195,34 +2195,32 @@ html, body { overflow-x: hidden; }
 
 
 
-<!-- ChatKit library -->
-<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
-
-
+<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" async></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (!window.ChatKit) {
-      console.error('ChatKit library is not available – check the script src or blockers');
-      return;
-    }
+window.addEventListener('load', function() {
+  if (!window.ChatKit) {
+    console.error("ChatKit didn't load. Check domainKey or network.");
+    return;
+  }
 
-    window.ChatKit.mount({
-      element: document.body,
-      workflowId: "wf_69088de093ac819096128e221efda65c0c916918504f9a78",
-      version: "4",  // как в окошке Get code
-      domainKey: "domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0",
-      theme: {
-        colorScheme: "dark",
-        accentColor: "#1E90FF"
-      },
-      position: {
-        bottom: "20px",
-        right: "20px"
-      }
-    });
+  window.ChatKit.mount({
+    element: document.body,
+    workflowId: "wf_69088de093ac819096128e221efda65c0c916918504f9a78",
+    version: "4",
+    domainKey: "domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0",
+    theme: {
+      colorScheme: "dark",
+      accentColor: "#1E90FF"
+    },
+    position: {
+      bottom: "20px",
+      right: "20px"
+    }
   });
+});
 </script>
+
 
 
 
@@ -2236,6 +2234,7 @@ html, body { overflow-x: hidden; }
 
 </body>
 </html>
+
 
 
 
