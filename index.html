@@ -2195,12 +2195,14 @@ html, body { overflow-x: hidden; }
 
 
 
-<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" async></script>
+<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
 
 <script>
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
+  console.log('ChatKit on load =', window.ChatKit);  // временный лог
+
   if (!window.ChatKit) {
-    console.error("ChatKit didn't load. Check domainKey or network.");
+    console.error('ChatKit library is not available – check the script src or blockers');
     return;
   }
 
@@ -2232,8 +2234,10 @@ window.addEventListener('load', function() {
 
 
 
+
 </body>
 </html>
+
 
 
 
