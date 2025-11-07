@@ -2211,6 +2211,14 @@ html, body { overflow-x: hidden; }
   data-api-key="domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0">
 </script>
 
+  <script>
+  const script = document.createElement('script');
+  script.src = "https://cdn.platform.openai.com/deployments/chatkit/chatkit.js";
+  script.onload = () => console.log('ChatKit script loaded');
+  script.onerror = () => console.error('ChatKit script failed');
+  document.head.appendChild(script);
+</script>
+  
 <script>
   document.addEventListener('load', function () {
     if (!window.ChatKit) {
@@ -2245,6 +2253,7 @@ html, body { overflow-x: hidden; }
 
 </body>
 </html>
+
 
 
 
