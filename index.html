@@ -2204,12 +2204,11 @@ html, body { overflow-x: hidden; }
 
 
 
- <script type="module">
-  import { ChatKit } from "https://cdn.platform.openai.com/deployments/chatkit/chatkit.js";
-
+<script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
+<script>
   window.addEventListener('load', async () => {
     try {
-      await ChatKit.mount({
+      await window.ChatKit.mount({
         element: document.body,
         workflowId: "wf_69088de093ac819096128e221efda65c0c916918504f9a78",
         apiKey: "domain_pk_690b75954f5481909a3eca005e63fecf0018d30c00369ee0",
@@ -2235,6 +2234,7 @@ html, body { overflow-x: hidden; }
 
 </body>
 </html>
+
 
 
 
