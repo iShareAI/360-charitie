@@ -364,6 +364,179 @@
 }
 
 
+/* ================= FULLSCREEN VIDEO HERO ================= */
+.video-hero{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 calc(50% - 50vw);   /* true full-bleed */
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;           /* keeps overlays clean */
+}
+
+/* Background video */
+.video-hero video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* cover the entire hero */
+  object-position: center;
+  transform: scale(1.02);       /* tiny scale to avoid edge gaps */
+  filter: saturate(1.05) contrast(1.03);
+}
+
+/* Overlays for readability */
+.video-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 520px at 60% 30%, rgba(37,124,255,.22), transparent 60%),
+    linear-gradient(180deg, rgba(2,6,23,.60) 0%, rgba(2,6,23,.35) 40%, rgba(2,6,23,.78) 100%);
+  z-index: 1;
+  pointer-events:none;
+}
+
+.video-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(1000px 700px at 50% 50%, transparent 55%, rgba(2,6,23,.50) 100%);
+  z-index: 1;
+  pointer-events:none;
+}
+
+/* Content overlay */
+.video-hero-inner{
+  position: relative;
+  z-index: 2;
+  width: min(1200px, 95vw);
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 24px 12px;
+  box-sizing: border-box;
+}
+
+.video-hero-kicker{
+  font: 700 12px/1.2 Inter, system-ui;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.78);
+}
+
+.video-hero-title{
+  margin: 0;
+  font-family: 'Poppins','Inter',system-ui;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: .2px;
+  font-size: clamp(34px, 5vw, 64px);
+  color: #fff;
+}
+
+.video-hero-title .grad{
+  background: linear-gradient(90deg, #ffffff 0%, #dbeafe 30%, #c4b5fd 65%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.video-hero-lead{
+  margin: 0;
+  max-width: 70ch;
+  font: 600 16px/1.55 Inter, system-ui;
+  color: rgba(255,255,255,.85);
+}
+
+.video-hero-actions{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.video-hero-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  font: 700 14px/1 Inter, Inter, system-ui;
+  text-decoration:none;
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .08s ease, background .2s ease, border-color .2s ease;
+}
+.video-hero-btn:hover{
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.28);
+}
+.video-hero-btn:active{ transform: translateY(1px); }
+
+.video-hero-btn.primary{
+  background: rgba(37,124,255,.95);
+  border-color: rgba(37,124,255,.95);
+}
+.video-hero-btn.primary:hover{ filter: brightness(.97); }
+
+/* Scroll hint */
+.video-hero-scroll{
+  position:absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 2;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  color: rgba(255,255,255,.75);
+  font: 700 12px/1 Inter, system-ui;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  user-select:none;
+}
+
+.video-hero-scroll i{
+  width: 22px;
+  height: 34px;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,.55);
+  position: relative;
+  display:inline-block;
+}
+.video-hero-scroll i::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 6px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.75);
+  transform: translateX(-50%);
+  animation: scrollDot 1.4s ease-in-out infinite;
+}
+@keyframes scrollDot{
+  0%{ transform: translate(-50%, 0); opacity: .9; }
+  70%{ transform: translate(-50%, 10px); opacity: .25; }
+  100%{ transform: translate(-50%, 0); opacity: .9; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .video-hero-scroll i::after{ animation: none; }
+}
+
+    
 
   </style>
 </head>
@@ -408,6 +581,44 @@
       </nav>
     </div>
   </header>
+
+
+<!-- ================= FULLSCREEN VIDEO HERO ================= -->
+<section class="video-hero" aria-label="Project intro video">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="img/hero-poster.jpg">
+    <source src="img/hero-video.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-hero-inner">
+    <div class="video-hero-kicker">Educational Cluster</div>
+
+    <h1 class="video-hero-title">
+      <span class="grad">Johnson Faculty of Business</span>
+    </h1>
+
+    <p class="video-hero-lead">
+      Learning, leadership & innovation — an immersive 360° experience showcasing
+      modern academic spaces designed for collaboration and entrepreneurship.
+    </p>
+
+    <div class="video-hero-actions">
+      <a class="video-hero-btn primary" href="#about">Explore</a>
+      <a class="video-hero-btn" href="#panorama">Open 360°</a>
+    </div>
+  </div>
+
+  <div class="video-hero-scroll" aria-hidden="true">
+    Scroll <i></i>
+  </div>
+</section>
+
+  
 
   <!-- ================= HERO ================= -->
   <div class="section">
@@ -496,4 +707,5 @@
 
 </body>
 </html>
+
 
