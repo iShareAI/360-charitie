@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harris School of Medicine — Educational Cluster</title>
+
+
+  <link rel="icon" href="img/letra-i.png" type="image/png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Johnson Faculty of Business — Educational Cluster">
+  <meta property="og:description" content="An immersive 360° educational environment for business leadership, innovation, and entrepreneurship.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Base ===== */
+    :root{
+      --hdr-accent:#257cff;
+      --hdr-bg: rgba(0,119,255,.78);
+      --hdr-blur: 10px;
+      --hdr-speed: .25s;
+      --border: #e6e8eb;
+      --text: #0f172a;
+      --muted:#475569;
+      --ring: rgba(37,124,255,.28);
+    }
+
+    html, body { height: 100%; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body{
+      background:#ffffff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== Header ===== */
+    .site-header{
+      position: sticky; top:0; z-index:50;
+      background: var(--hdr-bg);
+      backdrop-filter: blur(var(--hdr-blur));
+      -webkit-backdrop-filter: blur(var(--hdr-blur));
+      box-shadow: 0 10px 30px rgba(2,6,23,.10);
+      transform: translateZ(0);
+      transition: background var(--hdr-speed) ease, transform .22s ease;
+    }
+    .site-header.is-hidden{ transform: translateY(-100%); }
+    .site-header .nav-inner{ transition: padding var(--hdr-speed) ease; }
+
+    .nav-inner{
+      width:min(1200px,95vw);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:30px 12px;
+      box-sizing:border-box;
+    }
+    .site-header.is-compact .nav-inner{ padding: 10px 12px; }
+
+    .brand img{ display:block; height:32px; width:auto; }
+    .site-header.is-compact .brand img{ height:24px; }
+
+    .nav{
+      margin-left:auto;
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      position:relative;
+    }
+
+    .nav-link{
+      color:#e5e7eb;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      position:relative;
+      isolation:isolate;
+      transition: background .15s ease, transform .06s ease;
+      contain: paint;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      line-height:1.1;
+    }
+    .nav-link:hover,
+    .nav-link.active{ background:#257cff; color:#fff; }
+
+    .nav-link:active{ transform: translateY(1px); }
+
+    .nav-link:focus-visible{
+      outline: 2px solid rgba(255,255,255,.9);
+      outline-offset: 2px;
+    }
+
+    @media (max-width:640px){
+      .brand img{ height:26px; }
+      .nav-link{ padding:6px 10px; font-size:14px; }
+    }
+
+    /* ===== Fancy ring effect for nav links (your style) ===== */
+    @property --ang {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+    @keyframes nav-ring-spin{ to { --ang: 360deg; } }
+
+    .nav-link::before{
+      --ring-w: 2px;
+      content: "";
+      position: absolute;
+      inset: calc(-1 * var(--ring-w));
+      border-radius: inherit;
+      padding: var(--ring-w);
+      background: conic-gradient(from var(--ang,0deg),
+               #dbeafc, #eae1ff, #d2edf1, #ffffff);
+      -webkit-mask: linear-gradient(#000 0 0) content-box,
+                     linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events:none;
+      opacity:0;
+      transition: opacity .2s ease;
+      animation: nav-ring-spin 2.5s linear infinite paused;
+    }
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before{
+      opacity:.9;
+      animation-play-state: running;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .nav-link::before{ animation:none; opacity:0; }
+      .nav-link:hover::before,
+      .nav-link:focus-visible::before{ opacity:.6; }
+    }
+
+    /* ===== Header shimmer line ===== */
+    .site-header::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:0; height:2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--hdr-accent) 20%,
+        #9333ea 50%,
+        #06b6d4 80%,
+        transparent 100%);
+      background-size: 200% 100%;
+      animation: hdr-shimmer 6s linear infinite;
+      opacity:.7;
+      pointer-events:none;
+    }
+    @keyframes hdr-shimmer{ to{ background-position:200% 0; } }
+
+    /* ===== Scroll progress bar (optional but matches your style) ===== */
+    .site-header .scrollbar{
+      position:absolute; left:0; bottom:0; height:2px; width:100%;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, var(--hdr-accent), #9333ea);
+      pointer-events:none; mix-blend-mode: soft-light;
+    }
+
+    /* ===== Dropdown (Educational Cluster) ===== */
+    .nav-dd{
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-dd-trigger{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding-right: 18px; /* room for caret */
+    }
+
+    .nav-dd-caret{
+      font-size: 12px;
+      opacity: .9;
+      transform: translateY(1px);
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events:none;
+    }
+
+    .nav-dd-menu{
+      position: absolute;
+      top: 100%;        /* no gap */
+      margin-top: 4px;  /* visual spacing only */
+      right: 0;
+
+      min-width: 280px;
+      padding: 8px;
+      border-radius: 12px;
+
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 18px 40px rgba(2,6,23,.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      opacity: 0;
+      transform: translateY(4px) scale(.98);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 200;
+    }
+
+    .nav-dd:hover .nav-dd-menu,
+    .nav-dd:focus-within .nav-dd-menu{
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .nav-dd-item{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 10px;
+      text-decoration:none;
+      font: 600 14px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: #0f172a;
+      white-space: nowrap;
+    }
+    .nav-dd-item:hover,
+    .nav-dd-item:focus-visible{
+      background: rgba(37,124,255,.12);
+      outline:none;
+    }
+    .nav-dd-item.active{
+      background: rgba(37,124,255,.18);
+    }
+
+    /* hover safety zone to prevent flicker */
+    .nav-dd::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      top:100%;
+      height:8px;
+    }
+
+    @media (max-width:640px){
+      .nav-dd-menu{ min-width: 240px; right:0; left:auto; }
+    }
+
+    /* ===== Layout blocks ===== */
+    .section{
+      width: min(1200px, 95vw);
+      margin: 16px auto 8px;
+      box-sizing:border-box;
+    }
+
+    /* ===== Hero (simple, consistent) ===== */
+    .hero-phil{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      padding:14px 16px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-phil.is-brand{ --accent:#257cff; --ring:rgba(37,124,255,.28); }
+
+    .hero-title{
+      margin: 0;
+      font-family: 'Poppins','Inter',system-ui;
+      font-weight: 800;
+      letter-spacing: .2px;
+      font-size: clamp(22px, 3.2vw, 34px);
+      line-height: 1.15;
+      color: var(--text);
+    }
+    .hero-line{ display:block; }
+
+    .hero-line.gradient{
+      background:linear-gradient(90deg,var(--accent) 0%, #9333ea 50%, #06b6d4 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-size:200% 100%;
+      animation: heroShimmer 6s ease-in-out infinite;
+    }
+    @keyframes heroShimmer{
+      0%{ background-position:0% 50%; }
+      50%{ background-position:100% 50%; }
+      100%{ background-position:0% 50%; }
+    }
+
+    .hero-lead{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font: 600 14px/1.5 Inter, system-ui;
+      max-width: 70ch;
+    }
+
+    .table-title{
+      text-align:left;
+      font-family:'Inter',system-ui;
+      font-weight:700;
+      margin: 18px auto 10px;
+      width: min(1200px,95vw);
+      box-sizing:border-box;
+    }
+
+    /* ===== Viewer ===== */
+    #viewer{
+      position: relative;
+      width: min(1200px, 95vw);
+      aspect-ratio: 16 / 9;
+      margin: 20px auto 16px;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-sizing:border-box;
+    }
+    #viewer iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:none !important;
+      outline:none;
+      box-shadow:none;
+    }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce){
+      .hero-line.gradient{ animation:none; }
+      .site-header::after{ animation:none; }
+    }
+
+
+/* ================= FULLSCREEN PANORAMA ================= */
+.pano-full{
+  width: 100vw;
+  height: 100vh;                 /* full screen */
+  margin: 0 calc(50% - 50vw);    /* truly full-bleed (ignores container width) */
+  position: relative;
+  background: #000;
+}
+
+.pano-full iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" title="Home">
+        <img src="img/lg.png" alt="iShare logo">
+      </a>
+
+      <nav class="nav">
+        <a href="index.html" class="nav-link">General Hospital</a>
+        <a href="ken-sargent-house.html" class="nav-link">Ken Sargent House</a>
+        <a href="brightwell-medical-center.html" class="nav-link">Brightwell Medical Center</a>
+        <a href="campus-of-care.html" class="nav-link">Campus of Care</a>
+
+        <!-- Educational Cluster (Dropdown) -->
+        <div class="nav-dd">
+          <a class="nav-link nav-dd-trigger active"
+             href="johnson-faculty-of-business.html"
+             aria-haspopup="true"
+             aria-expanded="false">
+            Educational Cluster
+            <span class="nav-dd-caret" aria-hidden="true">▾</span>
+          </a>
+
+          <div class="nav-dd-menu" role="menu">
+            <a class="nav-dd-item" role="menuitem" href="johnson-faculty-of-business.html">
+              Johnson Faculty of Business
+            </a>
+            <a class="nav-dd-item active" role="menuitem" href="harris-school-of-medicine.html">
+  Harris School of Medicine
+</a>
+<a class="nav-dd-item" role="menuitem" href="stadium-project.html">
+  Stadium
+</a>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <div class="section">
+    <header class="hero-phil is-brand compact luxe">
+      <div class="hero-right">
+        <h1 class="hero-title">
+          <span class="hero-line">Harris School of Medicine</span>
+<span class="hero-line gradient">Medical Education & Clinical Excellence</span>
+
+        </h1>
+
+       <p class="hero-lead">
+  The Harris School of Medicine is an advanced educational environment focused
+  on medical training, research, and clinical excellence. This immersive 360°
+  experience highlights learning spaces designed to support future healthcare
+  professionals.
+</p>
+
+      </div>
+    </header>
+  </div>
+
+  <!-- ================= 360° VIEWER ================= -->
+  <!-- ================= FULLSCREEN PANORAMA ================= -->
+<section class="pano-full" aria-label="360 panorama">
+  <iframe
+    src="https://app.seekbeak.com/v/gd1p4R801XJ"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+</section>
+
+
+
+  <!-- ================= CONTENT ================= -->
+  <div class="section">
+    <h2 class="table-title">About the Project</h2>
+
+    <p style="max-width:1200px;margin:0 auto 40px;color:#475569;line-height:1.6;">
+      This immersive 360° experience showcases the Johnson Faculty of Business,
+      highlighting its classrooms, collaboration spaces, and student-focused design.
+      The project demonstrates how educational architecture supports innovation,
+      teamwork, and real-world learning.
+    </p>
+  </div>
+
+  <script>
+    (function(){
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+
+      // progress bar
+      const bar = document.createElement('div');
+      bar.className = 'scrollbar';
+      header.appendChild(bar);
+
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      function onScroll(){
+        const y  = window.scrollY;
+        const dh = document.documentElement.scrollHeight - innerHeight;
+
+        // scroll progress
+        const p = dh > 0 ? (y / dh) : 0;
+        bar.style.transform = `scaleX(${p})`;
+
+        // compact mode
+        header.classList.toggle('is-compact', y > 24);
+
+        // hide on scroll down (after some distance)
+        const delta = y - lastY;
+        const pastHero = y > 260;
+        if (Math.abs(delta) > 4 && pastHero){
+          const hidden = (delta > 0 && y > 120);
+          header.classList.toggle('is-hidden', hidden);
+        }
+        lastY = y;
+      }
+
+      window.addEventListener('scroll', ()=>{
+        if (!ticking){
+          requestAnimationFrame(()=>{ onScroll(); ticking = false; });
+          ticking = true;
+        }
+      }, {passive:true});
+
+      onScroll();
+    })();
+  </script>
+
+</body>
+</html>
