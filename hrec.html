@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <title>State University — Educational Cluster</title>
+  <title>Holodomor 1932–1933 — HREC Virtual Exhibit</title>
 
   <link rel="icon" href="img/letra-i.png" type="image/png">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="State University — Educational Cluster">
-  <meta property="og:description" content="An immersive 360° educational environment for higher education, research, and campus life.">
+  <meta property="og:title" content="Holodomor 1932–1933 — HREC Virtual Exhibit">
+<meta property="og:description" content="An immersive 360° virtual exhibit created in collaboration with the Holodomor Research & Education Consortium (HREC), presenting the history and memory of the Holodomor genocide in Ukraine.">
+
   <meta property="og:type" content="website">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -266,7 +268,7 @@
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
-      border:1px solid var(--border);
+      border:none;
       border-radius:12px;
       background:#fff;
       padding:14px 16px;
@@ -362,6 +364,7 @@
   border: 0;
 }
 
+
 /* ================= FULLSCREEN VIDEO HERO ================= */
 .video-hero{
   position: relative;
@@ -386,16 +389,7 @@
 }
 
 /* Overlays for readability */
-.video-hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(900px 520px at 60% 30%, rgba(37,124,255,.22), transparent 60%),
-    linear-gradient(180deg, rgba(2,6,23,.60) 0%, rgba(2,6,23,.35) 40%, rgba(2,6,23,.78) 100%);
-  z-index: 1;
-  pointer-events:none;
-}
+
 
 .video-hero::after{
   content:"";
@@ -534,6 +528,7 @@
   .video-hero-scroll i::after{ animation: none; }
 }
 
+    
 
   </style>
 </head>
@@ -552,12 +547,12 @@
         <a href="ken-sargent-house.html" class="nav-link">Ken Sargent House</a>
         <a href="brightwell-medical-center.html" class="nav-link">Brightwell Medical Center</a>
         <a href="campus-of-care.html" class="nav-link">Campus of Care</a>
-        <a href="hrec.html" class="nav-link">HREC</a>
+        <a href="hrec.html" class="nav-link active">HREC</a>
 
 
         <!-- Educational Cluster (Dropdown) -->
         <div class="nav-dd">
-          <a class="nav-link nav-dd-trigger active"
+          <a class="nav-link nav-dd-trigger "
              href="johnson-faculty-of-business.html"
              aria-haspopup="true"
              aria-expanded="false">
@@ -575,13 +570,13 @@
 <a class="nav-dd-item" role="menuitem" href="stadium-project.html">
   Stadium
 </a>
-<a class="nav-dd-item active" role="menuitem" href="state-university.html">State University</a>
-
+            <a class="nav-dd-item " role="menuitem" href="state-university.html">State University</a>
           </div>
         </div>
       </nav>
     </div>
   </header>
+
 
 <!-- ================= FULLSCREEN VIDEO HERO ================= -->
 <section class="video-hero" aria-label="Project intro video">
@@ -591,26 +586,24 @@
     loop
     playsinline
     preload="metadata"
-    poster="img/state-university-hero-poster.jpg">
-    <source src="img/state-university-hero-video.mp4" type="video/mp4">
+    poster="img/hero-poster.jpg">
+    <source src="img/hrec.mp4" type="video/mp4">
   </video>
 
   <div class="video-hero-inner">
     <div class="video-hero-kicker">Educational Cluster</div>
 
     <h1 class="video-hero-title">
-      <span class="grad">State University</span>
+      <span class="grad">Holodomor 1932–1933</span>
+
     </h1>
 
     <p class="video-hero-lead">
-      Higher education, research & campus life — an immersive 360° experience
-      showcasing academic spaces, public areas, and student-centered design.
-    </p>
+An immersive 360° virtual exhibit developed with the Holodomor Research & Education Consortium (HREC), presenting historical evidence, survivor testimony, and archival materials documenting the Holodomor genocide in Ukraine.
+</p>
 
-    <div class="video-hero-actions">
-      <a class="video-hero-btn primary" href="#about">Explore</a>
-      <a class="video-hero-btn" href="#panorama">Open 360°</a>
-    </div>
+
+  
   </div>
 
   <div class="video-hero-scroll" aria-hidden="true">
@@ -618,22 +611,21 @@
   </div>
 </section>
 
-
-
+  
 
   <!-- ================= HERO ================= -->
   <div class="section">
     <header class="hero-phil is-brand compact luxe">
       <div class="hero-right">
         <h1 class="hero-title">
-          <span class="hero-line">Johnson Faculty of Business</span>
-          <span class="hero-line gradient">Learning, Leadership & Innovation</span>
-        </h1>
+          <span class="hero-line">Holodomor Virtual Exhibit</span>
+<span class="hero-line gradient">Memory • History • Testimony</span>
 
-        <p class="hero-lead">
-          The Johnson Faculty of Business is a modern academic environment designed
-          to support entrepreneurship, leadership education, and collaborative learning.
-        </p>
+<p class="hero-lead">
+  This virtual exhibition explores the Holodomor — the famine-genocide in Soviet Ukraine of 1932–1933.
+  Through archival photographs, historical research, and survivor testimony, it preserves memory and supports education for future generations.
+</p>
+
       </div>
     </header>
   </div>
@@ -642,7 +634,7 @@
   <!-- ================= FULLSCREEN PANORAMA ================= -->
 <section class="pano-full">
   <iframe
-    src="https://app.seekbeak.com/v/VvjMvYRQqlJ"
+    src="https://app.seekbeak.com/v/60qZWBN81rB"
     allowfullscreen
     loading="lazy">
   </iframe>
@@ -650,16 +642,67 @@
 
 
   <!-- ================= CONTENT ================= -->
-  <div class="section" id="about">
-    <h2 class="table-title">About the Project</h2>
+  <!-- ================= CONTENT ================= -->
+<div class="section">
+  <h2 class="table-title">About the Exhibit</h2>
 
-    <p style="max-width:1200px;margin:0 auto 40px;color:#475569;line-height:1.6;">
-      The State University project presents a comprehensive academic campus designed
-      to support education, research, and community engagement. The immersive 360°
-      experience highlights lecture halls, shared learning environments, and the
-      spatial organization of a contemporary university campus.
-    </p>
-  </div>
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    The Holodomor Virtual Exhibit was created in collaboration with the Holodomor Research & Education Consortium (HREC).
+    The project presents a digital reconstruction of a historical exhibition dedicated to the famine-genocide that occurred
+    in Soviet Ukraine in 1932–1933.
+  </p>
+
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    Through immersive 360° environments, visitors can explore archival photographs, historical documents, and curated
+    educational materials. The exhibition explains the policies of forced collectivization, grain requisition, and
+    restrictions on movement that prevented people from leaving affected regions and searching for food.
+  </p>
+
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    The goal of the project is to preserve historical memory, support education, and provide accessible learning tools
+    for students, researchers, and the general public worldwide.
+  </p>
+</div>
+
+
+<!-- ================= EDUCATIONAL PURPOSE ================= -->
+<div class="section">
+  <h2 class="table-title">Educational Purpose</h2>
+
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    This virtual environment allows users to experience the exhibition remotely while maintaining the structure and
+    narrative logic of a physical museum space. Instead of reading isolated information, visitors move through
+    rooms and visual contexts, creating a stronger emotional and cognitive connection to historical material.
+  </p>
+
+  <p style="max-width:1200px;margin:0 auto 40px;color:#475569;line-height:1.7;">
+    The exhibit is intended for educational institutions, cultural organizations, and public history initiatives,
+    demonstrating how immersive technologies can expand access to historical knowledge and cultural heritage.
+  </p>
+</div>
+<!-- ================= TECHNOLOGY ================= -->
+<div class="section">
+  <h2 class="table-title">Technology & Production</h2>
+
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    The virtual exhibit was created as an interactive XR environment combining 3D visualization,
+    panoramic photography, and web-based immersive technologies.
+  </p>
+
+  <p style="max-width:1200px;margin:0 auto 22px;color:#475569;line-height:1.7;">
+    Artificial intelligence tools were used to assist with image restoration, visual enhancement,
+    and preparation of historical materials for digital presentation. The final environment was
+    assembled and optimized for real-time online viewing, allowing visitors to explore the
+    exhibition directly in a web browser without installing additional software.
+  </p>
+
+  <p style="max-width:1200px;margin:0 auto 40px;color:#475569;line-height:1.7;">
+    The project demonstrates how immersive visualization and AI-assisted workflows can support
+    cultural heritage preservation and remote education.
+  </p>
+</div>
+
+
 
   <script>
     (function(){
@@ -708,4 +751,9 @@
 
 </body>
 </html>
+
+
+
+
+
 
